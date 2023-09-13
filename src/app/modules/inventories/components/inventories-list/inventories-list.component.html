@@ -1,0 +1,108 @@
+<!-- HEADER -->
+<div class="row mb-3">
+  <div class="col-xl-12">
+    <div class="card shadow rounded border-0 p-3">
+      <div class="row">
+        <div class="col-xl-6 d-flex justify-content-start">
+          <!-- BTN BACK -->
+          <button type="button" class="btn btn-outline-dark btn-sm me-2" [routerLink]="'/home'">
+            <i class="bi bi-arrow-left"></i>
+          </button>
+          <p class="fs-3 mb-0 text-uppercase">Inventarios</p>
+        </div>
+        <div class="col-xl-6 d-flex justify-content-end">
+
+          <!-- DATE -->
+          <input
+            type="date"
+            class="form-control me-2"
+            [value]="[today | date:'yyyy-MM-dd']"
+          >
+
+          <!-- SEARCH -->
+          <input
+            type="text"
+            class="form-control border-primary-subtle me-2"
+            placeholder="Buscar por Tienda"
+            [(ngModel)]="searchText"
+          >
+
+          <!-- BTN NEW -->
+          <button type="button" class="btn btn-primary me-2" (click)="getTemplate('NEW')">
+            <i class="bi bi-plus-lg"></i>
+          </button>
+
+          <!-- BTN EXCEL -->
+          <button type="button" class="btn btn-success me-2">
+            <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+          </button>
+
+          <!-- BTN PDF -->
+          <button type="button" class="btn btn-danger me-2">
+            <i class="bi bi-file-earmark-pdf-fill"></i>
+          </button>
+
+          <!-- BTN PRINT -->
+          <button type="button" class="btn btn-secondary">
+            <i class="bi bi-printer-fill"></i>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- LIST -->
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card shadow rounded border-0 p-3">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr class="text-nowrap">
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">TIENDA</th>
+            <th scope="col">EMPLEADO</th>
+            <th scope="col">OBSERVACIONES</th>
+            <th scope="col">ESTADO</th>
+            <th scope="col">FECHA</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="text-nowrap"
+              *ngFor="let inventory of listInventories | filterInventories:searchText | slice: (page-1) * pageSize : page * pageSize">
+            <td class="p-1 text-center">
+              <button type="button" class="btn btn-danger btn-sm m-0">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </td>
+            <td class="p-1 text-center">
+              <button type="button" class="btn btn-primary btn-sm m-0" (click)="getInventory(inventory)">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+            </td>
+            <td>{{ inventory.storeId }}</td>
+            <td>{{ inventory.employeeId }}</td>
+            <td>{{ inventory.issues }}</td>
+            <td class="fw-bold text-muted" *ngIf="!inventory.status">Terminado</td>
+            <td class="text-success fw-bold" *ngIf="inventory.status">Contando...</td>
+
+            <td>{{ inventory.date }}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="row">
+        <div class="col-xl-12">
+          <ngb-pagination [collectionSize]="listInventories.length" [pageSize]="pageSize" [(page)]="page"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

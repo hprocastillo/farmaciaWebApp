@@ -1,0 +1,82 @@
+<!-- HEADER -->
+<div class="row mb-3">
+  <div class="col-xl-12">
+    <div class="card shadow rounded border-0 p-3">
+      <div class="row">
+        <div class="col-xl-6">
+          <p class="fs-3 mb-0">Nueva Tienda</p>
+        </div>
+        <div class="col-xl-6 d-flex justify-content-end">
+
+          <!-- BTN CANCEL -->
+          <button type="reset" class="btn btn-danger me-2" (click)="getTemplate('LIST')">
+            <i class="bi bi-x-circle-fill"></i>
+            Cancelar
+          </button>
+
+          <!-- BTN SAVE -->
+          <button type="button" class="btn btn-success" (click)="openModalSave()">
+            <i class="bi bi-hdd-fill"></i>
+            Guardar
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FORM -->
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card shadow rounded border-0 p-3">
+
+      <!-- CODE -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="codeInput"
+          placeholder="Código">
+        <label for="codeInput">Código</label>
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="descriptionInput"
+          placeholder="Descripción">
+        <label for="descriptionInput">Descripción</label>
+      </div>
+
+      <!-- ADDRESS -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="addressInput"
+          placeholder="Dirección">
+        <label for="addressInput">Dirección</label>
+      </div>
+
+      <!-- PHONE -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="phoneInput"
+          placeholder="Teléfono">
+        <label for="phoneInput">Teléfono</label>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="col-xl-6">
+
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<!-- LIST TEMPLATE -->
+<app-inventories-list
+  *ngIf="template === 'LIST'"
+  (outTemplate)="getTemplate($event)"
+  (outInventory)="getInventory($event)"
+></app-inventories-list>
+
+<!-- NEW TEMPLATE -->
+<app-inventories-new
+  *ngIf="template === 'NEW'"
+  (outTemplate)="getTemplate($event)"
+></app-inventories-new>
+
+<!-- VIEW TEMPLATE -->
+<app-inventories-view
+  *ngIf="template === 'VIEW'"
+  [inventory]="inventorySelected"
+  (outTemplate)="getTemplate($event)"
+></app-inventories-view>

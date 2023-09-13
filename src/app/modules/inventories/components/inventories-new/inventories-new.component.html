@@ -1,0 +1,131 @@
+<!-- HEADER -->
+<div class="row mb-3">
+  <div class="col-xl-12">
+    <div class="card shadow rounded border-0 p-3">
+      <div class="row">
+        <div class="col-xl-6 d-flex justify-content-start">
+          <!-- BTN BACK -->
+          <button type="button" class="btn btn-outline-dark btn-sm me-2" (click)="getTemplate('LIST')">
+            <i class="bi bi-arrow-left"></i>
+          </button>
+          <p class="fs-3 mb-0 text-uppercase">Nuevo Inventario</p>
+        </div>
+        <div class="col-xl-6 d-flex justify-content-end">
+
+          <!-- SELECT STORE -->
+          <select class="form-select me-2 w-50" aria-label="Default select example">
+            <option selected>Seleccionar Tienda</option>
+            <option value="1">Barranco 01</option>
+            <option value="2">Barranco 02</option>
+            <option value="3">Barranco 03</option>
+            <option value="4">Chorrillos 01</option>
+            <option value="5">Chorrillos 02</option>
+            <option value="6">Chorrillos 03</option>
+            <option value="7">Chorrillos 04</option>
+            <option value="8">Chorrillos 05</option>
+            <option value="9">Chorrillos 06</option>
+          </select>
+
+          <!-- BTN CANCEL -->
+          <button type="reset" class="btn btn-danger me-2" (click)="getTemplate('LIST')">
+            <i class="bi bi-x-circle-fill"></i>
+          </button>
+
+          <!-- BTN SAVE -->
+          <button type="button" class="btn btn-success">
+            <i class="bi bi-hdd-fill"></i>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FORM -->
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card shadow rounded border-0 p-3">
+
+      <ng-container *ngIf="table">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr class="text-nowrap text-center">
+              <th scope="col">#</th>
+              <th scope="col">CODPRO</th>
+              <th scope="col">DESPRO</th>
+              <th scope="col">CODLAB</th>
+              <th scope="col">DESLAB</th>
+              <th scope="col">STK_E</th>
+              <th scope="col">STK_F</th>
+              <th scope="col">ESTADO</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-nowrap text-center" *ngFor="let nid of newInventoryDetail; let i = index">
+              <td>{{ i + 1}}</td>
+              <td>{{ nid.code_pro }}</td>
+              <td>{{ nid.description_pro}}</td>
+              <td>{{ nid.code_lab }}</td>
+              <td>{{ nid.description_lab }}</td>
+              <td>{{ nid.stock_e }}</td>
+              <!-- STOCK F -->
+              <td *ngIf="!nid.stock_f_enable">
+                <button type="button" class="btn btn-primary btn-sm" (click)="enableStockF(nid.code_pro)">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+              </td>
+              <td *ngIf="nid.stock_f_enable">
+                <input type="number" class="form-control" style="width: 100px">
+              </td>
+              <!-- STATUS -->
+              <td class="fw-medium text-success" *ngIf="nid.status">Guardado</td>
+              <td *ngIf="!nid.status">
+                <button type="button" class="btn btn-success btn-sm" (click)="openModalStatus(modalStatus)">
+                  ok?
+                </button>
+                <!-- MODAL -->
+                <ng-template #modalStatus let-modal>
+                  <div class="modal-body text-center">
+                    <p class="lead">¿Es correcto el stock para el producto: <span
+                      class="fw-bold">{{nid.description_pro}}</span>
+                      ?</p>
+                    <!-- BUTTON CANCEL -->
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-sm me-3"
+                      (click)="modal.dismiss('Cross click')">
+                      <i class="bi bi-x-circle-fill"></i>
+                      No
+                    </button>
+                    <!-- BUTTON OK -->
+                    <button type="button" class="btn btn-success btn-sm" (click)="saveStatus(nid.code_pro)">
+                      <i class="bi bi-hdd-fill"></i>
+                      Si
+                    </button>
+                  </div>
+                </ng-template>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!table">
+        <div class="row">
+          <div class="col-xl-6">
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Seleccionar archivo Excel</label>
+              <input class="form-control" type="file" id="formFile" (change)="getTable()">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+
+    </div>
+  </div>
+</div>

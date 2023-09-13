@@ -1,0 +1,11 @@
+<!-- LIST TEMPLATE -->
+<app-stores-list
+  *ngIf="template === 'LIST'"
+  (outTemplate)="getTemplate($event)"
+></app-stores-list>
+
+<!-- NEW TEMPLATE -->
+<app-stores-new
+  *ngIf="template === 'NEW'"
+  (outTemplate)="getTemplate($event)"
+></app-stores-new>
